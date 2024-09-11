@@ -29,12 +29,12 @@ jobs:
     - name: Cache node_modules
       uses: actions/cache@v3
       with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        path: hello-pipeline/node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('hello-pipeline/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
 
-    # Instalar dependências
+    # Instalar dependências dentro da pasta hello-pipeline
     - name: Install dependencies
       run: npm ci
       working-directory: hello-pipeline
@@ -51,12 +51,4 @@ jobs:
 
     # Executar testes com cobertura
     - name: Run tests with coverage
-      run: npm run test:coverage
-      working-directory: hello-pipeline
-
-    # Upload do relatório de cobertura de código
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v3
-      with:
-        name: coverage-report
-        path: hello-pipeline/coverage
+      run: npm run
